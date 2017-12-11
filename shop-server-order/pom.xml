@@ -12,7 +12,7 @@
     <artifactId>shop-server-order</artifactId>
     <dependencies>
         <dependency>
-            <groupId>cn.wolfcode</groupId>
+            <groupId>com.example</groupId>
             <artifactId>shop-api-order</artifactId>
         </dependency>
         <!--spring-boot-web依赖-->
