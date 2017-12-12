@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-@Controller
+@RestController
 public class TestRestController {
 
     /**
@@ -16,7 +16,6 @@ public class TestRestController {
      * @return
      */
     @RequestMapping(value = "/departments", method = RequestMethod.GET)
-    @ResponseBody
     public Object restIndex() {
         HashMap<Object, Object> map = new HashMap<>();
         map.put(1L, "zmh");
@@ -31,7 +30,6 @@ public class TestRestController {
      * @return
      */
     @RequestMapping(value = "/departments/{id}", method = RequestMethod.GET)
-    @ResponseBody
     public Object restIndex1(@PathVariable("id") Long did) {
         HashMap<Object, Object> map  = new HashMap<>();
         LinkedList<Object>      maps = new LinkedList<>();
@@ -50,7 +48,6 @@ public class TestRestController {
      * @return
      */
     @RequestMapping(value = "/departments", method = RequestMethod.POST)
-    @ResponseBody
     public void createResources(Product product) {
         System.out.println(product.getName());
     }
@@ -60,7 +57,6 @@ public class TestRestController {
      * DELETE /department/1/employee/1
      */
     @RequestMapping(value = "/departments/{did}/employees/{eid}", method = RequestMethod.DELETE)
-    @ResponseBody
     public void deleteResource(@PathVariable("did") int did, @PathVariable("eid") int eid) {
         System.out.println(did + ":" + eid);
     }
@@ -71,7 +67,6 @@ public class TestRestController {
     //    @RequestMapping(value = "/depts", method = RequestMethod.GET,headers = {"Accept=application/json"})
     @RequestMapping(value = "/depts", method = RequestMethod.GET,
             produces = "application/json")// produces = headers 为Accept
-    @ResponseBody
     public void departmentJson() {
         System.out.println("使用json的表现形式?");
     }
@@ -80,7 +75,6 @@ public class TestRestController {
             method = RequestMethod.GET,
             headers = {"Accept=application/xml"},
             params = {"id", "name"}) //必须有这两个参数
-    @ResponseBody
     public void departmentXml(Long id, String name) {
         System.out.println("使用xml的表现形式?" + id + ":" + name);
     }
@@ -88,14 +82,14 @@ public class TestRestController {
     /**
      * 同一个URI,使用不容的请求体内容 比如:普通的form表单提交和用json请求体内容提交
      */
-    @RequestMapping(value = "/depts", method = RequestMethod.POST, headers = "Content-Type=application/x-www-form-urlencoded")
-    @ResponseBody
+    //    @RequestMapping(value = "/depts", method = RequestMethod.POST, headers = "Content-Type=application/x-www-form-urlencoded")
+    @RequestMapping(value = "/depts", method = RequestMethod.POST,
+            consumes = "application/x-www-form-urlencoded")//consumes = Headers 为Content-Type
     public void departmentForm(Product product) {
         System.out.println("form表单: " + product.getId() + ":" + product.getName());
     }
 
     @RequestMapping(value = "/depts", method = RequestMethod.POST, headers = "Content-Type=application/json")
-    @ResponseBody
     public void departmentFormJson(@RequestBody Product product) {
         System.out.println("json表单: " + product.getId() + ":" + product.getName());
     }

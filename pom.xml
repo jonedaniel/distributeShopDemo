@@ -15,6 +15,8 @@
         <module>shop-client-website</module>
         <module>shop-server-goods</module>
         <module>shop-server-order</module>
+        <module>shop-server-member</module>
+        <module>shop-api-common</module>
     </modules>
 
     <properties>
@@ -34,10 +36,19 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+        </dependency>
     </dependencies>
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>2.7.0</version>
+            </dependency>
             <dependency>
                 <groupId>com.example</groupId>
                 <artifactId>shop-api-goods</artifactId>
@@ -46,6 +57,11 @@
             <dependency>
                 <groupId>com.example</groupId>
                 <artifactId>shop-api-order</artifactId>
+                <version>1.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.example</groupId>
+                <artifactId>shop-api-common</artifactId>
                 <version>1.0</version>
             </dependency>
             <dependency>
