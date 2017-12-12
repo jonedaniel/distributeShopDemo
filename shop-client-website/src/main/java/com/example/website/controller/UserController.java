@@ -4,13 +4,16 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.example.shop.common.domain.User;
 import com.example.shop.common.service.IUserService;
 import com.example.shop.common.vo.JsonResult;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/user")
+@RequestMapping(value = "/user",produces = "application/json")
+@Api(value = "用户接口",description = "汉化...")
 public class UserController {
     @Reference
     IUserService userService;
@@ -38,6 +41,7 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/token",method = RequestMethod.POST,consumes = "application/x-www-form-urlencoded")
+    @ApiOperation(value = "用户登录",notes = "就是用户登录")
     public JsonResult login(String userName,String password) {
         JsonResult jsonResult = new JsonResult();
         User       user = userService.login(userName, password);

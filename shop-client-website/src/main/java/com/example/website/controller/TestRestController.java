@@ -1,8 +1,11 @@
 package com.example.website.controller;
 
 import com.example.shop.goods.domain.Product;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.annotations.ApiIgnore;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -90,6 +93,7 @@ public class TestRestController {
     }
 
     @RequestMapping(value = "/depts", method = RequestMethod.POST, headers = "Content-Type=application/json")
+    @ApiImplicitParam(name = "product", paramType = "body")
     public void departmentFormJson(@RequestBody Product product) {
         System.out.println("json表单: " + product.getId() + ":" + product.getName());
     }
